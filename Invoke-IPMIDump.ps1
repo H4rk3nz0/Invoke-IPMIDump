@@ -129,6 +129,10 @@ function Attempt-Retrieve {
         try {
             $sResponse1 = Send-Receive -Sock $sock -IP $IP -Data $data -Port $Port
             $iMessageLength = $sResponse1[14]
+            if ($sResponse1[17] -eq 18) {
+                Write-Host "[-] $User doesn't exist"
+                return
+            }
             if ($iMessageLength -eq 60) {
 
                 Write-Host "[+] $User :"
